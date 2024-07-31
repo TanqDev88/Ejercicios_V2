@@ -1,4 +1,4 @@
-# Ejercicios entrevista tecnica
+# Ejercicios entrevista técnica
 ***
 
 ![Image text](https://github.com/TanqDev88/Ejercicios_V2/blob/main/Image.png)
@@ -9,17 +9,18 @@
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 ## Contenido
-1. [Informacion general](#general-info)
-2. [Tecnologias](#technologies)
-3. [Instalacion](#installation)
+1. [Información general](#general-info)
+2. [Tecnologías](#technologies)
+3. [Instalación](#installation)
+4. [Testing](#testing)
 
 
 <a name="general-info"></a>
-## Informacion General 
-En este repositorio se encuentran los puntos correpondientes la actividad del ejercicio tecnico V2
+## Información General 
+En este repositorio se encuentran los puntos correspondientes la actividad del ejercicio técnico V2
 ***
 
-### Menu principal
+### Menú principal
 
 ## Estado del Proyecto 🚧 
 <details>
@@ -46,7 +47,7 @@ En este repositorio se encuentran los puntos correpondientes la actividad del ej
    </details>
 
  <a name="installation"></a>  
-## Instalacion del proyecto
+## Instalación del proyecto
 ***
 Clonar el proyecto desde la siguiente URL de Github. 
 ```
@@ -60,8 +61,53 @@ npm install express multer csv-parser axios
 npm install moment
 
 ```
-Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para levantar el servicio:
+Desde la carpeta donde se clonó el proyecto ejecutar el siguiente comando para levantar el servicio:
 ```
 node index.js
 
 ```
+<a name="testing"></a>  
+## Testing  📖🖍️
+   
+<details>
+    <summary>Click Aquí para Detalle ↩️</summary>
+    <br>
+   <p>1 - POST - Listado</p>
+<ul>
+  
+  PASOS<br>
+1- Seleccionar método POST e ingresar la URL = "http://localhost:3000/upload-csv" <br> 
+2- Desde la pestaña Body seleccionar la opción "form-data".<br> 
+3- Añadir el campo "file" asignando el valor "File"<br>
+4- Cargar el archivo listado.csv (adjunto en el mail y disponible en el proyecto)<br>
+5- Enviar el POST
+</ul>
+
+   <p>2 - POST - Credito</p>
+<ul>
+  
+  PASOS<br>
+1- Seleccionar método POST e ingresar la URL = "http://localhost:3000/transfer-credits"<br> 
+2- Desde la pestaña Body seleccionar la opción "raw".<br> 
+3- Ingresar el siguiente JSON de prueba:<br>
+```
+{
+  "fromID": "1",
+  "toID": "2",
+  "amount": 5
+}
+
+```
+5- Enviar el POST
+</ul>
+
+<p>3 - GET - Reporte</p>
+<ul>
+  
+  PASOS<br>
+1- Seleccionar método GET e ingresar la URL = "[http://localhost:3000/upload-csv](http://localhost:3000/report-credits?startDate=2024-07-01&endDate=2024-08-31)" <br> 
+2- Añadir la key "startDate" asignando el valor "2024-07-01"<br>
+2- Añadir la key "endDate" asignando el valor "2024-08-01"<br>
+2- Enviar el GET.
+</ul>
+

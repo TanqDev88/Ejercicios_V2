@@ -55,7 +55,7 @@ npm install express multer csv-parser axios
 npm install moment
 
 ```
-Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para ejecutarlo:
+Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para levantar el servicio:
 ```
 node index.js
 

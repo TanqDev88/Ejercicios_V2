@@ -52,10 +52,10 @@ Instalar las siguientes herramientas de manera local:
 ```
 npm install
 npm install express multer csv-parser axios
-npm install express multer csv-parser axios
+npm install moment
 
 ```
-Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para ejecutarlo. 
+Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para ejecutarlo:
 ```
 node index.js
 

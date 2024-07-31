@@ -85,6 +85,36 @@ app.post('/transfer-credits', (req, res) => {
     res.send('Transferencia de créditos realizada con éxito');
 });
 
+/* Generacion de reportes para el punto 3*/
+app.get('/report-credits', (req, res) => {
+    const { startDate, endDate } = req.query;
+
+    // Valida fecha (intervalo)
+    if (!startDate || !endDate) {
+        return res.status(400).send('Faltan parámetros');
+    }
+
+    const start = parseISO(startDate);
+    const end = parseISO(endDate);
+
+    // OJO - Validar las fechas
+    if (!isValid(start) || !isValid(end)) {
+        return res.status(400).send('Fechas inválidas');
+    }
+
+    // Filtrar fecha
+    const filteredTransfers = creditTransfers.filter(transfer => {
+        return isWithinInterval(new Date(transfer.date), { start, end });
+    });
+
+    const totalCredits = filteredTransfers.reduce((sum, transfer) => sum + transfer.amount, 0);
+
+    res.json({
+        totalCredits,
+        transfers: filteredTransfers
+    });
+});
+
 app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://localhost:${port}`);
 });

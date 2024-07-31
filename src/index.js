@@ -4,11 +4,15 @@ const csv = require('csv-parser');// Paquete Node
 const fs = require('fs');
 const app = express();//instancia de Express para la API
 const port = 3000;
-
+// Aca maneja la carga,
 const upload = multer({ dest: 'uploads/' });
+
+// Middleware para el JSON
+app.use(express.json());
 
 let crmData = [];
 
+/* Punto 1 No modificar*/
 app.post('/upload-csv', upload.single('file'), (req, res) => {
     if (!req.file) { //Verificar aca que subio
         return res.status(400).send('No se subio el archivo');
@@ -48,6 +52,37 @@ app.post('/upload-csv', upload.single('file'), (req, res) => {
 
 app.get('/crm-data', (req, res) => {
     res.json(crmData);
+});
+
+/* Manejar los creditos para el punto 2*/
+
+// Ruta
+app.post('/transfer-credits', (req, res) => {
+    const { fromID, toID, amount } = req.body;
+
+    // Validar campos 
+    if (!fromID || !toID || !amount) {
+        return res.status(400).send('Faltan datos en la solicitud');
+    }
+
+    // Buscar los Clients
+    const fromPerson = crmData.find(person => person.ID === fromID);
+    const toPerson = crmData.find(person => person.ID === toID);
+
+    // OJO! Validar que las personas existan
+    if (!fromPerson || !toPerson) {
+        return res.status(404).send('Una o ambas personas no existen');
+    }
+
+    // OJO! Validar que la persona que transfiere tenga suficientes créditos
+    if (fromPerson.Créditos < amount) {
+        return res.status(400).send('Créditos insuficientes para la transferencia');
+    }
+
+    fromPerson.Créditos -= amount;
+    toPerson.Créditos += amount;
+
+    res.send('Transferencia de créditos realizada con éxito');
 });
 
 app.listen(port, () => {
